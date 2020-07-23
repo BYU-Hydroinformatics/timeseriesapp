@@ -22,7 +22,7 @@
   <li class="{% if request.path == home_url %}active{% endif %}"><a href="{{ home_url }}">Instructions</a></li>
   <li class="{% if request.path == api_url %}active{% endif %}"><a href="{{ api_url }}">Using API (Marker and Polygon)</a></li>
   <li class="{% if request.path == csv_url %}active{% endif %}"><a href="{{ csv_url }}">Uploading a Csv or JSON to retrieve data</a></li>
-  <li class="{% if request.path == hydroshare_url %}active{% endif %}"><a href="{{ hydroshare_url }}">Using Hydroshare or Hydroserver </a></li>
+  <li class="{% if request.path == hydroshare_url %}active{% endif %}"><a href="{{ hydroshare_url }}">Using Hydroshare</a></li>
 {% endblock %}
 
 {% block app_content %}
@@ -37,6 +37,7 @@
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw-src.css"/>
   <link href="{% static 'timeseriesapp/css/main.css' %}" rel="stylesheet"/>
 {% endblock %}
 
@@ -45,10 +46,14 @@
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
    crossorigin=""></script>
+   <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw-src.js"></script>
 
  <!-- Load Esri Leaflet from CDN -->
  <script src="https://unpkg.com/esri-leaflet@2.4.1/dist/esri-leaflet.js"
    integrity="sha512-xY2smLIHKirD03vHKDJ2u4pqeHA7OQZZ27EjtqmuhDguxiUvdsOuXMwkg16PQrm9cgTmXtoxA6kwr8KBy3cdcw=="
    crossorigin=""></script>
+   <script src="https://unpkg.com/geoglows@2.0.8/dist/geoglows.min.js"></script>
+
   <script src="{% static 'timeseriesapp/js/main.js' %}" type="text/javascript"></script>
 {% endblock %}
