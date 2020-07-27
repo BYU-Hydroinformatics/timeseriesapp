@@ -12,6 +12,10 @@
 <div id="mpaPanel">
   <div id="map"></div>
   <div id="ghs">
+    <div id="addSoapIdCentering">
+      <h2>Oops, you need to select a feature ..</h2>
+      <img src="{% static 'timeseriesapp/images/nodata.png' %}" alt="">
+    </div>
   </div>
 </div>
 
@@ -25,12 +29,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h5 class="modal-title" id="help-modal-label">Example Modal</h5>
+          <h5 class="modal-title" id="help-modal-label">API Instructions Modal</h5>
         </div>
         <div class="modal-body">
-          <p>You can add custom buttons to the app header using the <code>header_buttons</code> block. Use anchor/link tags for the button and wrap it in a div with the class <code>header-button</code>. For buttons with the gliphyicons, add the <code>glyphicon-button</code> class as well.</p>
-          <p>Ever have trouble using a modal in a Tethys app? Use the <code>after_app_content</code> block for modal content to allow them to function properly. See: <a href="https://getbootstrap.com/javascript/#modals">Bootstrap Modals</a></p>
-          <p>Add tooltips to any element by adding the <code>data-toggle</code>, <code>data-placement</code>, and <code>title</code> attributes to the button. See: <a href="https://getbootstrap.com/javascript/#tooltips">Bootstrap Tooltips</a></p>
+          <p> This page tries to illustrate how one can create different features and assign to them time series throughout an API. The user will see a map, and a toolbar
+          at the left hand site, so he/she can draw a polygon, customized marker, circle marker, circle, rectangle, and a polyline. Once the user choose and draw any of the above features.
+        He/she can click on it to display the time series associated with them. Finally, the user can click on the white button to delete all the features and graphs associated with it.</p>
+        <p><em>Note: the user can select only a feature at a time to display a time series in the bottom part of the screen </em></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
