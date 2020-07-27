@@ -31,3 +31,12 @@
     width: 10%;
     height: 25%;
 }
+
+#ghs{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+/* #selectId{
+  width: 10%;
+} */
