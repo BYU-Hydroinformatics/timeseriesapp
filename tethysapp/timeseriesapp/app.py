@@ -44,6 +44,11 @@ class Timeseriesapp(TethysAppBase):
                 url='timeseriesapp/hydroshare',
                 controller='timeseriesapp.controllers.hydroshare_'
             ),
+            UrlMap(
+                name='geoserver',
+                url='timeseriesapp/geoserver',
+                controller='timeseriesapp.controllers.geoserver_'
+            ),
         )
 
         return url_maps

@@ -39,3 +39,13 @@ def hydroshare_(request):
     context = {}
 
     return render(request, 'timeseriesapp/hydroshare.html', context)
+
+def geoserver_(request):
+    """
+    Controller for the app home page.
+    """
+
+
+    context = {}
+
+    return render(request, 'timeseriesapp/geoserver.html', context)
