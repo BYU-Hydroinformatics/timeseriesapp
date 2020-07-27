@@ -1,9 +1,7 @@
-// var map = L.map('map').setView([4.5709, -74.2973], 6);
-//
-//  L.esri.basemapLayer('Topographic').addTo(map);
+
 var caseToAddGeolocalizacion;
 var reachid = 9000286;
-// GEOGLOWS.forecast.graph_stats(reachid,"graphs","Time Series",true,700);
+
 
  var MyCustomMarker = L.Icon.extend({
    options: {
@@ -85,46 +83,40 @@ map2.addControl(removeAllControl);
      layer.on('click', function(e){
        // GEOGLOWS.forecast.graph_stats(reachid,"graphs","Time Series",true,700);
        // GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",undefined,"Time Series",2000);
+       // GEOGLOWS.forecast.graph_fr(reachid,"ghs","Time Series",false,1200);
        $("#ghs").empty();
-       GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1500);
+       // GEOGLOWS.forecast.graph_fr(reachid,"ghs","Time Series",false,1200);
 
+       // GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
+       console.log($("#changeTS")['0'].value);
+       if($("#changeTS")['0'].value =="Forecast 1"){
+         GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+       }
+       if($("#changeTS")['0'].value =="Historical 1"){
+         GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
+
+       }
+       if($("#changeTS")['0'].value == "Seasonal 1"){
+         GEOGLOWS.seasonal.graph(reachid,"ghs","Time Series",true,1200,350);
+
+       }
      })
-     // if(layer['_latlng']){
-     //   caseToAddGeolocalizacion=`${layer['_latlng']['lat']},${layer['_latlng']['lng']}`
-     // }
-     // else{
-     //   caseToAddGeolocalizacion = getCentroid(layer['_latlngs']);
-     // }
-     // layer.bindPopup(function(){
-     //   console.log("hola");
-     //   GEOGLOWS.forecast.graph_stats(reachid,"graphs",undefined,true,700);
-     //
-     // })
-     // caseToAddGeolocalizacion=`${layer['_latlng']['lat']},${layer['_latlng']['lng']}`
+
      console.log(caseToAddGeolocalizacion);
  });
- var getCentroid = function (arr) {
-     return arr.reduce(function (x,y) {
-         return [x[0] + y[0]/arr.length, x[1] + y[1]/arr.length]
-     }, [0,0])
+ // Adding a event to the select box//
+ var changeTimeseries = function(){
+   console.log($("#changeTS")['0'].value);
+   if($("#changeTS")['0'].value =="Forecast 1"){
+     GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+   }
+   if($("#changeTS")['0'].value =="Historical 1"){
+     GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
+
+   }
+   if($("#changeTS")['0'].value == "Seasonal 1"){
+     GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
+
+   }
  }
-
- var getCentroid2 = function (arr) {
-     var twoTimesSignedArea = 0;
-     var cxTimes6SignedArea = 0;
-     var cyTimes6SignedArea = 0;
-
-     var length = arr.length
-
-     var x = function (i) { return arr[i % length][0] };
-     var y = function (i) { return arr[i % length][1] };
-
-     for ( var i = 0; i < arr.length; i++) {
-         var twoSA = x(i)*y(i+1) - x(i+1)*y(i);
-         twoTimesSignedArea += twoSA;
-         cxTimes6SignedArea += (x(i) + x(i+1)) * twoSA;
-         cyTimes6SignedArea += (y(i) + y(i+1)) * twoSA;
-     }
-     var sixSignedArea = 3 * twoTimesSignedArea;
-     return [ cxTimes6SignedArea / sixSignedArea, cyTimes6SignedArea / sixSignedArea];
- }
+ $("#changeTS").change(changeTimeseries)
