@@ -4,7 +4,6 @@
 var caseToAddGeolocalizacion;
 var reachid = 9000286;
 // GEOGLOWS.forecast.graph_stats(reachid,"graphs","Time Series",true,700);
-GEOGLOWS.historical.graph(reachid,"graphs","Time Series",true,700);
 
  var MyCustomMarker = L.Icon.extend({
    options: {
@@ -25,13 +24,15 @@ GEOGLOWS.historical.graph(reachid,"graphs","Time Series",true,700);
      "Vista Satelital": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
          attribution: 'google'
      }),
- }, { 'Casos Anadido': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map2);
+ }, { 'Drawing options': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map2);
  map2.addControl(new L.Control.Draw({
      edit: {
          featureGroup: drawnItems,
          poly: {
              allowIntersection: false
-         }
+         },
+         remove: false
+
      },
      draw: {
          polyline:true,
@@ -45,14 +46,46 @@ GEOGLOWS.historical.graph(reachid,"graphs","Time Series",true,700);
      }
  }));
 
+ //Custom control to delete all points //
+ L.Control.RemoveAll = L.Control.extend({
+        options: {
+            position: 'topleft',
+        },
+
+        onAdd: function (map) {
+            var controlDiv = L.DomUtil.create('div', 'leaflet-control leaflet-bar');
+            var controlUI = L.DomUtil.create('a', 'leaflet-draw-edit-remove', controlDiv);
+            controlUI.title = 'Remove all drawn items';
+            controlUI.setAttribute('href', '#');
+
+            L.DomEvent
+                .addListener(controlUI, 'click', L.DomEvent.stopPropagation)
+                .addListener(controlUI, 'click', L.DomEvent.preventDefault)
+                .addListener(controlUI, 'click', function () {
+                    drawnItems.clearLayers();
+                    $("#ghs").empty();
+                    $("#ghs").html(`<div id="addSoapIdCentering">
+                          <h2>Oops, you need to select a feature ..</h2>
+                          <img src="/static/timeseriesapp/images/nodata.png" alt="">
+                        </div>`)
+                    if(window.console) window.console.log('Drawings deleted...');
+                });
+            return controlDiv;
+        }
+    });
+
+removeAllControl = new L.Control.RemoveAll();
+map2.addControl(removeAllControl);
+
  map2.on(L.Draw.Event.CREATED, function (event) {
      var layer = event.layer;
      drawnItems.addLayer(layer);
      L.Draw.Event.STOP;
      console.log(layer);
      layer.on('click', function(e){
-       console.log("hola");
        // GEOGLOWS.forecast.graph_stats(reachid,"graphs","Time Series",true,700);
+       // GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",undefined,"Time Series",2000);
+       $("#ghs").empty();
        GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1500);
 
      })
