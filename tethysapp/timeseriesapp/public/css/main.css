@@ -20,3 +20,14 @@
    width: 100%;
    height:100%;
  }
+#addSoapIdCentering{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+    align-items: center;
+}
+#addSoapIdCentering img{
+    width: 10%;
+    height: 25%;
+}
