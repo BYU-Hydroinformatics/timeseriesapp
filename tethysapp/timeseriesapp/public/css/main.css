@@ -10,9 +10,7 @@
 }
  #map {
    position: cover;
-   top:0; bottom:0;
-   right:0;
-   left:0;
+
    width: 100%;
    height: 600px;
  }
@@ -40,3 +38,13 @@
 /* #selectId{
   width: 10%;
 } */
+
+#geoserverEndpoint, #geoServerWorkspace{
+  width: 100%;
+}
+#submitGeoserver{
+  width: 100%;
+}
+#inner-app-content{
+  padding: 0px;
+}
