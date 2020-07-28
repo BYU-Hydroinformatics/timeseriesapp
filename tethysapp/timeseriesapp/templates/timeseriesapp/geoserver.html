@@ -13,14 +13,12 @@
 {% url 'timeseriesapp:api' as api_url %}
 {% url 'timeseriesapp:geoserver' as geoserver_url %}
 {% url 'timeseriesapp:csv' as csv_url %}
-{% url 'timeseriesapp:hydroshare' as hydroshare_url %}
 <li class="title">TimeSeries Options</li>
 
 <li class="{% if request.path == home_url %}active{% endif %}"><a href="{{ home_url }}">Instructions</a></li>
 <li class="{% if request.path == api_url %}active{% endif %}"><a href="{{ api_url }}">Using API (Marker and Polygon)</a></li>
 <li class="{% if request.path == geoserver_url %}active{% endif %}"><a href="{{ geoserver_url }}">Using Geoserver </a></li>
 <li class="{% if request.path == csv_url %}active{% endif %}"><a href="{{ csv_url }}">Uploading a Csv or JSON to retrieve data</a></li>
-<li class="{% if request.path == hydroshare_url %}active{% endif %}"><a href="{{ hydroshare_url }}">Using Hydroshare</a></li>
 <br>
 <br>
   <div id="selectId">
