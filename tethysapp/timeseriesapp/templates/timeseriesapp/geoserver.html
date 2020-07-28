@@ -28,10 +28,10 @@
     <p>Please enter the Geoserver endpoint and the name of the workspace, and press the button to update the map to display
     the new geoserver endpoint</p>
     <label for="fname">Geoserver Endpoint:</label>
-    <p>e.g. https://tethys2.byu.edu/geoserver/peru_hydroviewer/wms</p>
+    <p>(e.g.) https://tethys2.byu.edu/geoserver/colombia_hydroviewer/wms</p>
     <input type="text" id="geoserverEndpoint" name="geoserverEndpoint">
     <label for="fname">Geoserver Workspace:</label>
-    <p>e.g. south_america-peru-drainage_line</p>
+    <p>(e.g.) IDEAM_Stations_v2</p>
 
     <input type="text" id="geoServerWorkspace" name="geoServerWorkspace">
     <br>
@@ -64,12 +64,22 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h5 class="modal-title" id="help-modal-label">Example Modal</h5>
+          <h5 class="modal-title" id="help-modal-label">Geoserver Option</h5>
         </div>
         <div class="modal-body">
-          <p>You can add custom buttons to the app header using the <code>header_buttons</code> block. Use anchor/link tags for the button and wrap it in a div with the class <code>header-button</code>. For buttons with the gliphyicons, add the <code>glyphicon-button</code> class as well.</p>
-          <p>Ever have trouble using a modal in a Tethys app? Use the <code>after_app_content</code> block for modal content to allow them to function properly. See: <a href="https://getbootstrap.com/javascript/#modals">Bootstrap Modals</a></p>
-          <p>Add tooltips to any element by adding the <code>data-toggle</code>, <code>data-placement</code>, and <code>title</code> attributes to the button. See: <a href="https://getbootstrap.com/javascript/#tooltips">Bootstrap Tooltips</a></p>
+          <p> This page illustrates how to use the different layers from a Geoserver. The type of layer that will be demonstrated will be the WMS alyer, but there is
+          more web services that can be provided by Geoserver such as WFS that lets the user to have access to the layer attributes and values. The map shows the stations
+          of IDEAM,(Institute of Hydrology, Meteorology and Environmental Studies) of Colombia. These points when clicked display time series. Therefore. this is an example of
+          how time series can eb linked to shapefiles that are uploaded to a geoserver in a web applicacion. Finally, in the left corner there is a little menu to place different Geoserver
+          endpoints and workspaces, so the layer in the map will display the new layer after the button with the check mark is pressed. The map will display the layer that has entered in the input textboxes.</p>
+            <p><em>Note: follow the structure that is prompt to avoid errors.</em></p>
+          <p>Steps</p>
+          <ul>
+            <li> Enter the Geoserver Endpoint</li>
+            <li> Enter the Geoserver Workspace</li>
+            <li> Press the button and wait</li>
+            <li> Click in an attribute to display a time series</li>
+          </ul>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
