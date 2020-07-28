@@ -2,7 +2,7 @@
 var caseToAddGeolocalizacion;
 var reachid = 9000286;
 
-
+// Custom Marker added //
  var MyCustomMarker = L.Icon.extend({
    options: {
      shadowUrl: null,
@@ -11,6 +11,7 @@ var reachid = 9000286;
      iconUrl: 'https://img.icons8.com/fluent/48/000000/rain-gauge.png'
    }
  });
+ // Defining map and also drawing controllers //
  var center = [4.5709, -74.2973];
  var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
          osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -75,19 +76,16 @@ var reachid = 9000286;
 removeAllControl = new L.Control.RemoveAll();
 map2.addControl(removeAllControl);
 
+// Add Click Event to the map, so when the feature is clicked a time series appear //
  map2.on(L.Draw.Event.CREATED, function (event) {
      var layer = event.layer;
      drawnItems.addLayer(layer);
      L.Draw.Event.STOP;
      console.log(layer);
      layer.on('click', function(e){
-       // GEOGLOWS.forecast.graph_stats(reachid,"graphs","Time Series",true,700);
-       // GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",undefined,"Time Series",2000);
-       // GEOGLOWS.forecast.graph_fr(reachid,"ghs","Time Series",false,1200);
-       $("#ghs").empty();
-       // GEOGLOWS.forecast.graph_fr(reachid,"ghs","Time Series",false,1200);
 
-       // GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
+       $("#ghs").empty();
+
        console.log($("#changeTS")['0'].value);
        if($("#changeTS")['0'].value =="Forecast 1"){
          GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
@@ -104,7 +102,8 @@ map2.addControl(removeAllControl);
 
      console.log(caseToAddGeolocalizacion);
  });
- // Adding a event to the select box//
+
+ // Adding a change event to the select dropdown//
  var changeTimeseries = function(){
    console.log($("#changeTS")['0'].value);
    if($("#changeTS")['0'].value =="Forecast 1"){
