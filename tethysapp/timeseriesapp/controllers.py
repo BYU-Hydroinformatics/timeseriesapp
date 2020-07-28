@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from tethys_sdk.permissions import login_required
 from tethys_sdk.gizmos import Button
+from .app import Timeseriesapp as app
 
 @login_required()
 def home(request):
@@ -44,8 +45,11 @@ def geoserver_(request):
     """
     Controller for the app home page.
     """
-
-
-    context = {}
+    geoserverEndpoint = app.get_custom_setting('Geoserver Endpoint')
+    geoserverWorkspace = app.get_custom_setting('Geoserver Workspace')
+    context = {
+        "endpoint": geoserverEndpoint,
+        "workspace": geoserverWorkspace,
+    }
 
     return render(request, 'timeseriesapp/geoserver.html', context)
