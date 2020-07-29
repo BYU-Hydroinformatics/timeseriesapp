@@ -1,0 +1,47 @@
+<!-- Modal -->
+{% load static %}
+
+<div class="modal fade" id="csv_upload_tab" tabindex="-1" role="dialog" aria-labelledby="upload_csv" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLongTitle">Upload a CSV Instructions </h5>
+
+      </div>
+      <div class="modal-body">
+        <p>The uploaded CSV of observed steamfled MUST satisfy the following:</p>
+        <p><em>Note: This instruction are only for this excersise, and app. You can format your csv file in the way that satisfies your needs.
+        The csv format presented here is to fullfill the purpose of the workshop</em></p>
+        <ol>
+          <li>Your csv must contain exactly 2 columns</li>
+          <li>The first row must contain the names for the columns (e.g. datetime and streamflow)</li>
+          <li>The first column must contain the date and time (datetime) of the observation</li>
+          <li>The date should be written in a format that can be recognized by a computer</li>
+          <li>The second column must contain the streamflow observations in cubic meters per second (cms)
+            (m^3/s)</li>
+          <li>There should be 1 value per day showing the day's average flow. If multiple measurements are
+            specified per day, they will be averaged together.</li>
+          <li><a href="{% static 'timeseriesapp/csvs/sample_observed_hydrograph.csv' %}" target="_blank">
+            Download a sample hydrograph formatted correctly</a></li>
+        </ol>
+        <hr>
+        <form id="hydrograph-csv-form" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label class="control-label" for="hydrograph-csv-input">Upload Hydrograph CSV</label>
+            <input type="file" id="hydrograph-csv-input" name="hydrograph-csv-input" accept="text/csv,.csv">
+            <input type="submit" value="Submit">
+          </div>
+        </form>
+        <hr>
+        <p><strong>Upload Status: </strong><span id="hydrograph-csv-status"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

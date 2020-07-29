@@ -8,17 +8,47 @@
   </div>
 {% endblock %}
 
+{% block app_navigation_items %}
+{% url 'timeseriesapp:home' as home_url %}
+{% url 'timeseriesapp:api' as api_url %}
+{% url 'timeseriesapp:geoserver' as geoserver_url %}
+{% url 'timeseriesapp:csv' as csv_url %}
+<li class="title">TimeSeries Options</li>
+
+<li class="{% if request.path == home_url %}active{% endif %}"><a href="{{ home_url }}">Instructions</a></li>
+<li class="{% if request.path == api_url %}active{% endif %}"><a href="{{ api_url }}">Using API (Marker and Polygon)</a></li>
+<li class="{% if request.path == geoserver_url %}active{% endif %}"><a href="{{ geoserver_url }}">Using Geoserver </a></li>
+<li class="{% if request.path == csv_url %}active{% endif %}"><a href="{{ csv_url }}">Uploading a Csv or JSON to retrieve data</a></li>
+<br>
+<br>
+<p>Upload a CSV File </p>
+<p>Press the button to upload a CSV. Once you press in the button, you will be presented a menu with prompts and instructions on how to upload a csv file to generate timeseries</p>
+<button id="upload_button" class="btn btn-danger"  data-toggle="modal" data-target="#csv_upload_tab"> <span class="glyphicon glyphicon-upload"></span></button>
+
+
+{% endblock %}
+
 {% block app_content %}
 <div id="mpaPanel">
   <div id="map"></div>
-  <div id="graphs">
-
+  <div id="ghs">
+    <div id="addSoapIdCentering">
+      <h2>Oops, you need to select a feature ..</h2>
+      <img src="{% static 'timeseriesapp/images/nodata.png' %}" alt="">
+    </div>
   </div>
 </div>
 
 {% endblock %}
 
 {# Use the after_app_content block for modals #}
+
+{% block app_content_wrapper_override %}
+
+{{ block.super }}
+{% include "timeseriesapp/modals/upload_csv_modal.html" %}
+
+{% endblock %}
 {% block after_app_content %}
   <!-- Example Modal -->
   <div class="modal fade" id="help-modal" tabindex="-1" role="dialog" aria-labelledby="help-modal-label">
@@ -26,12 +56,22 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h5 class="modal-title" id="help-modal-label">Example Modal</h5>
+          <h5 class="modal-title" id="help-modal-label">Geoserver Option</h5>
         </div>
         <div class="modal-body">
-          <p>You can add custom buttons to the app header using the <code>header_buttons</code> block. Use anchor/link tags for the button and wrap it in a div with the class <code>header-button</code>. For buttons with the gliphyicons, add the <code>glyphicon-button</code> class as well.</p>
-          <p>Ever have trouble using a modal in a Tethys app? Use the <code>after_app_content</code> block for modal content to allow them to function properly. See: <a href="https://getbootstrap.com/javascript/#modals">Bootstrap Modals</a></p>
-          <p>Add tooltips to any element by adding the <code>data-toggle</code>, <code>data-placement</code>, and <code>title</code> attributes to the button. See: <a href="https://getbootstrap.com/javascript/#tooltips">Bootstrap Tooltips</a></p>
+          <p> This page illustrates how to use the different layers from a Geoserver. The type of layer that will be demonstrated will be the WMS alyer, but there is
+          more web services that can be provided by Geoserver such as WFS that lets the user to have access to the layer attributes and values. The map shows the stations
+          of IDEAM,(Institute of Hydrology, Meteorology and Environmental Studies) of Colombia. These points when clicked display time series. Therefore. this is an example of
+          how time series can eb linked to shapefiles that are uploaded to a geoserver in a web applicacion. Finally, in the left corner there is a little menu to place different Geoserver
+          endpoints and workspaces, so the layer in the map will display the new layer after the button with the check mark is pressed. The map will display the layer that has entered in the input textboxes.</p>
+            <p><em>Note: follow the structure that is prompt to avoid errors.</em></p>
+          <p>Steps</p>
+          <ul>
+            <li> Enter the Geoserver Endpoint</li>
+            <li> Enter the Geoserver Workspace</li>
+            <li> Press the button and wait</li>
+            <li> Click in an attribute to display a time series</li>
+          </ul>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -44,4 +84,12 @@
 
 {% block app_actions %}
 
+{% endblock %}
+{% block scripts %}
+  {{ block.super }}
+  <script>
+    let URL_upload_new_observations = "{% url 'timeseriesapp:upload-new-observations' %}";
+  </script>
+
+  <script src="{% static 'timeseriesapp/js/csv.js' %}" type="text/javascript"></script>
 {% endblock %}
