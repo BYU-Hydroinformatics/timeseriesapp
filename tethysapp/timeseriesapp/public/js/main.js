@@ -83,20 +83,11 @@ map2.addControl(removeAllControl);
      L.Draw.Event.STOP;
      console.log(layer);
      layer.on('click', function(e){
-<<<<<<< HEAD
-
-       $("#ghs").empty();
-
-       console.log($("#changeTS")['0'].value);
-       if($("#changeTS")['0'].value =="Forecast 1"){
-         GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
-=======
        let latitude;
        let longitude;
        if(layer['_latlng']){
          latitude = layer['_latlng']['lat'];
          longitude = layer['_latlng']['lng'];
->>>>>>> api-option
        }
        else{
          let sumlats=0;
