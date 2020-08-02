@@ -45,11 +45,6 @@ class Timeseriesapp(TethysAppBase):
                 url='timeseriesapp/geoserver',
                 controller='timeseriesapp.controllers.geoserver_'
             ),
-           UrlMap(
-                name='upload-new-observations',
-                url='upload-new-observations/',
-                controller='timeseriesapp.controllers.upload_new_observations'
-            ),
         )
 
         return url_maps
