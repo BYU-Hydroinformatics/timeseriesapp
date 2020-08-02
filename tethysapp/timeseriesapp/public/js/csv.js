@@ -56,6 +56,8 @@ getCookie = function(name) {
 //ACTIVATE THE DEFAULT BEHAVIOR OF THE AJAX FOR POST REQUEST //
 addDefaultBehaviorToAjax();
 
+let markerGroup;
+let markerList = [];
 ////////////////////////////////////////////////////////////////////////  UPLOAD OBSERVATIONAL DATA
 $("#hydrograph-csv-form").on('submit', function (e) {
     e.preventDefault();
@@ -104,12 +106,17 @@ $("#hydrograph-csv-form").on('submit', function (e) {
             }
 
             console.log(timeSeriesObject);
-
+            if(markerGroup != undefined){
+              console.log("hola");
+              markerGroup.clearLayers();
+              markerList =[];
+            }
 
             for(let i=0; i< uniqueStationsID.length; ++i){
               let latlong = [uniquelats[i], uniquelongs[i]];
               console.log(latlong);
-              let marker =  L.marker(latlong).addTo(map2).on('click', function(e){
+
+              let marker =  L.marker(latlong).on('click', function(e){
                 console.log(e);
                 timeSeriesObject.forEach(function(x){
                   if(x['lat']==e['latlng']['lat']){
@@ -138,9 +145,11 @@ $("#hydrograph-csv-form").on('submit', function (e) {
                 })
 
               });
+              markerList.push(marker);
             }
+            console.log(markerGroup);
 
-
+            markerGroup = L.layerGroup(markerList).addTo(map2);
         },
         error: function (response) {
             upload_stats.html('failed to upload. ' + response['error'])
