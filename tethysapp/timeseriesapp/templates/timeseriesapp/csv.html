@@ -82,9 +82,7 @@
 {% endblock %}
 {% block scripts %}
   {{ block.super }}
-  <script>
-    let URL_upload_new_observations = "{% url 'timeseriesapp:upload-new-observations' %}";
-  </script>
+
 
   <script src="{% static 'timeseriesapp/js/csv.js' %}" type="text/javascript"></script>
 {% endblock %}
