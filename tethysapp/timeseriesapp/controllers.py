@@ -31,15 +31,6 @@ def csv_(request):
     context = {}
 
     return render(request, 'timeseriesapp/csv.html', context)
-def hydroshare_(request):
-    """
-    Controller for the app home page.
-    """
-
-
-    context = {}
-
-    return render(request, 'timeseriesapp/hydroshare.html', context)
 
 def geoserver_(request):
     """
