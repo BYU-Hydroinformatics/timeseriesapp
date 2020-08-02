@@ -59,18 +59,6 @@ def delete_old_observations():
             os.remove(uploaded_observation)
     return
 
-
-def list_uploaded_observations():
-    workspace_path = app.get_app_workspace().path
-    uploaded_observations = glob.glob(os.path.join(workspace_path, 'observations', '*.csv'))
-    list_of_observations = []
-    for uploaded_observation in uploaded_observations:
-        file_name = os.path.basename(uploaded_observation)
-        presentation_name = file_name.replace('_', ' ').replace('.csv', '')
-        list_of_observations.append((presentation_name, file_name))
-    return tuple(sorted(list_of_observations))
-
-
 def upload_new_observations(request):
     print("we are in the uploade_new_observations")
     delete_old_observations()
