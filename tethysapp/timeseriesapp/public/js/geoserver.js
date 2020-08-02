@@ -24,6 +24,7 @@ WMSLayer = L.tileLayer.betterWms(url, {
 // USE OF CLICK EVENTS //
 var marker = null;
 map.on("click", function (event) {
+  console.log(event);
     meta = WMSLayer.GetFeatureInfo(event);
     if(meta[0] !==null){
       if (marker) {
@@ -32,8 +33,8 @@ map.on("click", function (event) {
       console.log("this is meta");
       reachid = meta[0];
       console.log(reachid);
-      drain_area = meta[1];
-      region = meta[2];
+      // drain_area = meta[1];
+      // region = meta[2];
       marker = L.marker(event.latlng).addTo(map);
       $("#ghs").empty();
 
@@ -46,8 +47,8 @@ map.on("click", function (event) {
 var changeGeoserver = function(){
   var endpoint_geo = $("#geoserverEndpoint").val();
   var workspace_geo = $("#geoServerWorkspace").val();
-    map.removeLayer(WMSLayer);
-    url= endpoint_geo;
+  map.removeLayer(WMSLayer);
+  url= endpoint_geo;
     WMSLayer = L.tileLayer.betterWms(url, {
         layers: workspace_geo,
         format:'image/png',
@@ -57,7 +58,26 @@ var changeGeoserver = function(){
     $("#ghs").html(`<div id="addSoapIdCentering">
           <h2>Oops, you need to select a feature ..</h2>
           <img src="/static/timeseriesapp/images/nodata.png" alt="">
-        </div>`)
+        </div>`);
+    var marker = null;
+    map.on("click", function (event) {
+      console.log(event);
+        meta = WMSLayer.GetFeatureInfo(event);
+        if(meta[0] !==null){
+          if (marker) {
+            map.removeLayer(marker)
+          }
+          console.log("this is meta");
+          reachid = meta[0];
+          console.log(reachid);
+          // drain_area = meta[1];
+          // region = meta[2];
+          marker = L.marker(event.latlng).addTo(map);
+          $("#ghs").empty();
+
+          GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+        }
+    });
 }
 
 $("#submitGeoserver").on("click",changeGeoserver)
