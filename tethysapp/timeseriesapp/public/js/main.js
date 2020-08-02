@@ -83,21 +83,69 @@ map2.addControl(removeAllControl);
      L.Draw.Event.STOP;
      console.log(layer);
      layer.on('click', function(e){
+<<<<<<< HEAD
 
        $("#ghs").empty();
 
        console.log($("#changeTS")['0'].value);
        if($("#changeTS")['0'].value =="Forecast 1"){
          GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+=======
+       let latitude;
+       let longitude;
+       if(layer['_latlng']){
+         latitude = layer['_latlng']['lat'];
+         longitude = layer['_latlng']['lng'];
+>>>>>>> api-option
        }
-       if($("#changeTS")['0'].value =="Historical 1"){
-         GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
+       else{
+         let sumlats=0;
+         let sumlongs=0;
+         if(Array.isArray(layer['_latlngs']['0'])){
+           layer['_latlngs']['0'].forEach(function(x){
+             sumlongs = sumlongs + x['lng'];
+             sumlats = sumlats + x['lat'];
+           });
+           latitude = sumlats/layer['_latlngs']['0'].length;
+           longitude = sumlongs/layer['_latlngs']['0'].length;
+         }
+         else{
+           layer['_latlngs'].forEach(function(x){
+             sumlongs = sumlongs + x['lng'];
+             sumlats = sumlats + x['lat'];
+           });
+           latitude = sumlats/layer['_latlngs'].length;
+           longitude = sumlongs/layer['_latlngs'].length;
+           console.log(latitude);
+           console.log(longitude);
+         }
 
        }
-       if($("#changeTS")['0'].value == "Seasonal 1"){
-         GEOGLOWS.seasonal.graph(reachid,"ghs","Time Series",true,1200,350);
 
-       }
+       let url = `https://tethys2.byu.edu/localsptapi/api/GetReachID/?lat=${latitude}&lon=${longitude}`;
+       $.ajax({
+          type:"GET",
+          url: url,
+          success: function(result){
+            reachid= result['reach_id'];
+            console.log(result);
+            $("#ghs").empty();
+
+            console.log($("#changeTS")['0'].value);
+            if($("#changeTS")['0'].value =="Forecast 1"){
+              GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+            }
+            if($("#changeTS")['0'].value =="Historical 1"){
+              GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
+
+            }
+            if($("#changeTS")['0'].value == "Seasonal 1"){
+              GEOGLOWS.seasonal.graph(reachid,"ghs","Time Series",true,1200,350);
+            }
+          }
+        })
+
+
      })
 
      console.log(caseToAddGeolocalizacion);
