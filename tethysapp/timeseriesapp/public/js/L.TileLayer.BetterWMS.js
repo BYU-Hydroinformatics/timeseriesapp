@@ -45,10 +45,11 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
               url: url,
               info_format: 'application/json',
               success: function (data) {
+                console.log(data);
                   if(data['features'].length > 0){
                     reachid = data.features[0].properties['COMID'];
-                    drain_area = data.features[0].properties['Tot_Drain_'];
-                    region =  data.features[0].properties['region'];
+                    // drain_area = data.features[0].properties['Tot_Drain_'];
+                    // region =  data.features[0].properties['region'];
                     if(data.features[0].properties['new_COMID']){
                       reachid=data.features[0].properties['new_COMID'];
                     }
@@ -62,7 +63,8 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
           });
       }
 
-      return [reachid, drain_area,region]
+      // return [reachid, drain_area,region]
+      return [reachid]
 
 
   },
