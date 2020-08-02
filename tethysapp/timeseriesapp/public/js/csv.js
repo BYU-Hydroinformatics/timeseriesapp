@@ -147,9 +147,9 @@ $("#hydrograph-csv-form").on('submit', function (e) {
               });
               markerList.push(marker);
             }
-            console.log(markerGroup);
-
             markerGroup = L.layerGroup(markerList).addTo(map2);
+            markerFeatures = L.featureGroup(markerList);
+            map2.fitBounds(markerFeatures.getBounds());
         },
         error: function (response) {
             upload_stats.html('failed to upload. ' + response['error'])
