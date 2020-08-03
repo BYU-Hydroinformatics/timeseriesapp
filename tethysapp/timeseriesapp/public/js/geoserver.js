@@ -76,6 +76,8 @@ var changeGeoserver = function(){
           $("#ghs").empty();
 
           GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+          // GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
+          // GEOGLOWS.seasonal.graph(reachid,"ghs","Time Series",true,1200,350);
         }
     });
 }

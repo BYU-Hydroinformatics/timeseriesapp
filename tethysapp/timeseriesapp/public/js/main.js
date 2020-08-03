@@ -122,17 +122,9 @@ map2.addControl(removeAllControl);
             console.log(result);
             $("#ghs").empty();
 
-            console.log($("#changeTS")['0'].value);
-            if($("#changeTS")['0'].value =="Forecast 1"){
-              GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
-            }
-            if($("#changeTS")['0'].value =="Historical 1"){
-              GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
-
-            }
-            if($("#changeTS")['0'].value == "Seasonal 1"){
-              GEOGLOWS.seasonal.graph(reachid,"ghs","Time Series",true,1200,350);
-            }
+            GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+            // GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
+            // GEOGLOWS.seasonal.graph(reachid,"ghs","Time Series",true,1200,350);
           }
         })
 
@@ -141,21 +133,3 @@ map2.addControl(removeAllControl);
 
      console.log(caseToAddGeolocalizacion);
  });
-
- // Adding a change event to the select dropdown//
- var changeTimeseries = function(){
-   console.log($("#changeTS")['0'].value);
-   if($("#changeTS")['0'].value =="Forecast 1"){
-     GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
-   }
-   if($("#changeTS")['0'].value =="Historical 1"){
-     console.log("Historical");
-     GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
-
-   }
-   if($("#changeTS")['0'].value == "Seasonal 1"){
-     GEOGLOWS.seasonal.graph(reachid,"ghs","Time Series",true,1200,350);
-
-   }
- }
- $("#changeTS").change(changeTimeseries)

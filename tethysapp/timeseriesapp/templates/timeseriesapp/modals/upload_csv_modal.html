@@ -16,15 +16,17 @@
         <p><em>Note: This instruction are only for this excersise, and app. You can format your csv file in the way that satisfies your needs.
         The csv format presented here is to fullfill the purpose of the workshop</em></p>
         <ol>
-          <li>Your csv must contain exactly 2 columns</li>
-          <li>The first row must contain the names for the columns (e.g. datetime and streamflow)</li>
+          <li>Your csv must contain exactly 5 columns</li>
+          <li>The first row must contain the names for the columns (e.g. datetime, streamflow, stationID, lat, long)</li>
           <li>The first column must contain the date and time (datetime) of the observation</li>
           <li>The date should be written in a format that can be recognized by a computer</li>
           <li>The second column must contain the streamflow observations in cubic meters per second (cms)
             (m^3/s)</li>
-          <li>There should be 1 value per day showing the day's average flow. If multiple measurements are
-            specified per day, they will be averaged together.</li>
-          <li><a href="{% static 'timeseriesapp/csvs/sample_observed_hydrograph.csv' %}" target="_blank">
+          <li>The third column must contain the name of the stationID</li>
+          <li>The fourth column is the latitute</li>
+          <li>The fourth column is the longitute</li>
+
+          <li><a href="{% static 'timeseriesapp/csvs/sample_observed_hydrograph2.csv' %}" target="_blank">
             Download a sample hydrograph formatted correctly</a></li>
         </ol>
         <hr>
