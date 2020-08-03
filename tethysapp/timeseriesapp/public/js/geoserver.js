@@ -12,8 +12,7 @@ L.esri.basemapLayer('DarkGray').addTo(map);
 var WMSLayer;
 var layerGroup;
 var url = endpointGeoServer
-console.log(endpointGeoServer);
-console.log(geoServerWorkspace);
+
 WMSLayer = L.tileLayer.betterWms(url, {
     layers: geoServerWorkspace,
     format:'image/png',
@@ -24,15 +23,12 @@ WMSLayer = L.tileLayer.betterWms(url, {
 // USE OF CLICK EVENTS //
 var marker = null;
 map.on("click", function (event) {
-  console.log(event);
     meta = WMSLayer.GetFeatureInfo(event);
     if(meta[0] !==null){
       if (marker) {
         map.removeLayer(marker)
       }
-      console.log("this is meta");
       reachid = meta[0];
-      console.log(reachid);
       // drain_area = meta[1];
       // region = meta[2];
       marker = L.marker(event.latlng).addTo(map);
@@ -61,15 +57,12 @@ var changeGeoserver = function(){
         </div>`);
     var marker = null;
     map.on("click", function (event) {
-      console.log(event);
         meta = WMSLayer.GetFeatureInfo(event);
         if(meta[0] !==null){
           if (marker) {
             map.removeLayer(marker)
           }
-          console.log("this is meta");
           reachid = meta[0];
-          console.log(reachid);
           // drain_area = meta[1];
           // region = meta[2];
           marker = L.marker(event.latlng).addTo(map);

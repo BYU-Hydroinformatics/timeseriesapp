@@ -9,7 +9,7 @@ class Timeseriesapp(TethysAppBase):
 
     name = 'Timeseriesapp'
     index = 'timeseriesapp:home'
-    icon = 'timeseriesapp/images/dogo_logo.png'
+    icon = 'timeseriesapp/images/finalLogo.png'
     package = 'timeseriesapp'
     root_url = 'timeseriesapp'
     color = '#000000'
