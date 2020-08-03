@@ -18,16 +18,8 @@
 <li class="{% if request.path == home_url %}active{% endif %}"><a href="{{ home_url }}">Instructions</a></li>
 <li class="{% if request.path == api_url %}active{% endif %}"><a href="{{ api_url }}">Using API (Marker and Polygon)</a></li>
 <li class="{% if request.path == geoserver_url %}active{% endif %}"><a href="{{ geoserver_url }}">Using Geoserver </a></li>
-<li class="{% if request.path == csv_url %}active{% endif %}"><a href="{{ csv_url }}">Uploading a Csv or JSON to retrieve data</a></li>
-  <div id="selectId">
-    <p>Select a Time Series</p>
-    <p>The selected time series will be linked to the drawn feature from the map</p>
-    <select id = "changeTS" class="selectpicker">
-      <optgroup label="Forecast">
-        <option>Forecast 1</option>
-      </optgroup>
-    </select>
-  </div>
+<li class="{% if request.path == csv_url %}active{% endif %}"><a href="{{ csv_url }}">Uploading a Csv to retrieve data</a></li>
+
 {% endblock %}
 
 {% block app_content %}
