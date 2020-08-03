@@ -56,13 +56,13 @@ getCookie = function(name) {
 //ACTIVATE THE DEFAULT BEHAVIOR OF THE AJAX FOR POST REQUEST //
 addDefaultBehaviorToAjax();
 
+let markerGroup;
+let markerList = [];
 ////////////////////////////////////////////////////////////////////////  UPLOAD OBSERVATIONAL DATA
 $("#hydrograph-csv-form").on('submit', function (e) {
     e.preventDefault();
     let upload_stats = $("#hydrograph-csv-status");
     upload_stats.html('in progress...')
-    console.log(new FormData(this));
-    console.log(URL_upload_new_observations);
     $.ajax({
         type: 'POST',
         url: URL_upload_new_observations,
@@ -73,7 +73,6 @@ $("#hydrograph-csv-form").on('submit', function (e) {
         cache: false,
         processData: false,
         success: function (response) {
-            console.log(response);
             upload_stats.html('uploaded finished successfully.')
             let uploaded_input = $("#uploaded_observations");
             let stationsID= response['stationsIDs'];
@@ -103,14 +102,15 @@ $("#hydrograph-csv-form").on('submit', function (e) {
               timeSeriesObject.push(timeSerieStation);
             }
 
-            console.log(timeSeriesObject);
-
+            if(markerGroup != undefined){
+              markerGroup.clearLayers();
+              markerList =[];
+            }
 
             for(let i=0; i< uniqueStationsID.length; ++i){
               let latlong = [uniquelats[i], uniquelongs[i]];
-              console.log(latlong);
-              let marker =  L.marker(latlong).addTo(map2).on('click', function(e){
-                console.log(e);
+
+              let marker =  L.marker(latlong).on('click', function(e){
                 timeSeriesObject.forEach(function(x){
                   if(x['lat']==e['latlng']['lat']){
                     var timeserie1 = {
@@ -138,9 +138,11 @@ $("#hydrograph-csv-form").on('submit', function (e) {
                 })
 
               });
+              markerList.push(marker);
             }
-
-
+            markerGroup = L.layerGroup(markerList).addTo(map2);
+            markerFeatures = L.featureGroup(markerList);
+            map2.fitBounds(markerFeatures.getBounds());
         },
         error: function (response) {
             upload_stats.html('failed to upload. ' + response['error'])
