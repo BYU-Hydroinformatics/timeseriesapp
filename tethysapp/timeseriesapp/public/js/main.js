@@ -81,7 +81,6 @@ map2.addControl(removeAllControl);
      var layer = event.layer;
      drawnItems.addLayer(layer);
      L.Draw.Event.STOP;
-     console.log(layer);
      layer.on('click', function(e){
        let latitude;
        let longitude;
@@ -107,8 +106,6 @@ map2.addControl(removeAllControl);
            });
            latitude = sumlats/layer['_latlngs'].length;
            longitude = sumlongs/layer['_latlngs'].length;
-           console.log(latitude);
-           console.log(longitude);
          }
 
        }
@@ -119,25 +116,12 @@ map2.addControl(removeAllControl);
           url: url,
           success: function(result){
             reachid= result['reach_id'];
-            console.log(result);
             $("#ghs").empty();
-
-            console.log($("#changeTS")['0'].value);
-            if($("#changeTS")['0'].value =="Forecast 1"){
-              GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
-            }
-            if($("#changeTS")['0'].value =="Historical 1"){
-              GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
-
-            }
-            if($("#changeTS")['0'].value == "Seasonal 1"){
-              GEOGLOWS.seasonal.graph(reachid,"ghs","Time Series",true,1200,350);
-            }
+            GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
           }
         })
 
 
      })
 
-     console.log(caseToAddGeolocalizacion);
  });
