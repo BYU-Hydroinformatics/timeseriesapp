@@ -23,6 +23,7 @@ WMSLayer = L.tileLayer.betterWms(url, {
 // USE OF CLICK EVENTS //
 var marker = null;
 map.on("click", function (event) {
+    $("#loadingimg").show();
     meta = WMSLayer.GetFeatureInfo(event);
     if(meta[0] !==null){
       if (marker) {
@@ -35,6 +36,9 @@ map.on("click", function (event) {
       $("#ghs").empty();
 
       GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+      $("#loadingimg").hide();
+
+
     }
 
 });
@@ -57,6 +61,8 @@ var changeGeoserver = function(){
         </div>`);
     var marker = null;
     map.on("click", function (event) {
+        $("#loadingimg").show();
+
         meta = WMSLayer.GetFeatureInfo(event);
         if(meta[0] !==null){
           if (marker) {
@@ -67,8 +73,9 @@ var changeGeoserver = function(){
           // region = meta[2];
           marker = L.marker(event.latlng).addTo(map);
           $("#ghs").empty();
-
           GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+          $("#loadingimg").hide();
+          
         }
     });
 }
