@@ -19,6 +19,8 @@
 <li class="{% if request.path == api_url %}active{% endif %}"><a href="{{ api_url }}">Using API (Marker and Polygon)</a></li>
 <li class="{% if request.path == geoserver_url %}active{% endif %}"><a href="{{ geoserver_url }}">Using Geoserver </a></li>
 <li class="{% if request.path == csv_url %}active{% endif %}"><a href="{{ csv_url }}">Uploading a Csv to retrieve data</a></li>
+<label><img id="loadingimg" src="https://media.giphy.com/media/3ohs7Xldjh7DndQnBu/giphy.gif"/>   </label>
+
 {% endblock %}
 
 {% block app_content %}
