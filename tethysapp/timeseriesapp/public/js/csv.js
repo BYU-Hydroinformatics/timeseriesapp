@@ -63,6 +63,7 @@ $("#hydrograph-csv-form").on('submit', function (e) {
     e.preventDefault();
     let upload_stats = $("#hydrograph-csv-status");
     upload_stats.html('in progress...')
+    $("#loadingimg").show();
     $.ajax({
         type: 'POST',
         url: URL_upload_new_observations,
@@ -143,6 +144,8 @@ $("#hydrograph-csv-form").on('submit', function (e) {
             markerGroup = L.layerGroup(markerList).addTo(map2);
             markerFeatures = L.featureGroup(markerList);
             map2.fitBounds(markerFeatures.getBounds());
+            $("#loadingimg").hide();
+            
         },
         error: function (response) {
             upload_stats.html('failed to upload. ' + response['error'])
