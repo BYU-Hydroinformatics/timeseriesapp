@@ -114,6 +114,8 @@ map2.addControl(removeAllControl);
        }
 
        let url = `https://tethys2.byu.edu/localsptapi/api/GetReachID/?lat=${latitude}&lon=${longitude}`;
+       $("#loadingimg").show();
+
        $.ajax({
           type:"GET",
           url: url,
@@ -123,6 +125,8 @@ map2.addControl(removeAllControl);
             $("#ghs").empty();
 
             GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+            $("#loadingimg").hide();
+
             // GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
             // GEOGLOWS.seasonal.graph(reachid,"ghs","Time Series",true,1200,350);
           }

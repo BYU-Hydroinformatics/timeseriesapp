@@ -24,6 +24,7 @@ WMSLayer = L.tileLayer.betterWms(url, {
 // USE OF CLICK EVENTS //
 var marker = null;
 map.on("click", function (event) {
+  $("#loadingimg").show();
   console.log(event);
     meta = WMSLayer.GetFeatureInfo(event);
     if(meta[0] !==null){
@@ -39,6 +40,8 @@ map.on("click", function (event) {
       $("#ghs").empty();
 
       GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+      $("#loadingimg").hide();
+
     }
 
 });
@@ -60,7 +63,10 @@ var changeGeoserver = function(){
           <img src="/static/timeseriesapp/images/nodata.png" alt="">
         </div>`);
     var marker = null;
+
     map.on("click", function (event) {
+      $("#loadingimg").show();
+
       console.log(event);
         meta = WMSLayer.GetFeatureInfo(event);
         if(meta[0] !==null){
@@ -76,6 +82,8 @@ var changeGeoserver = function(){
           $("#ghs").empty();
 
           GEOGLOWS.forecast.graph_emsembles(reachid,"ghs",[15,2,52],"Time Series",1200);
+          $("#loadingimg").hide();
+
           // GEOGLOWS.historical.graph(reachid,"ghs","Time Series",true,1200,350);
           // GEOGLOWS.seasonal.graph(reachid,"ghs","Time Series",true,1200,350);
         }
